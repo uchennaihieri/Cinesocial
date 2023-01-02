@@ -3,30 +3,40 @@ import styled from 'styled-components';
 
 interface BasicCardProps {
   title: string;
-  description: string;
-  imageUrl: string;
+  dime: string;
 }
 
-export default function BasicCard({ title, description, imageUrl }: BasicCardProps) {
+interface ShadowedProps {
+  bgColor: string;
+};
+
+
+export default function BasicCard({ title, dime }: BasicCardProps) {
   return (
-    <Card>
-      <NextImage src={imageUrl} width={128} height={128} alt={title} />
+    <Card bgColor={dime} >
       <Title>{title}</Title>
-      <Description>{description}</Description>
     </Card>
   );
 }
 
-const Card = styled.div`
+
+
+const Card = styled.div<ShadowedProps>`
   display: flex;
   padding: 2.5rem;
-  background: rgb(var(--cardBackground));
+  background-image:  linear-gradient(
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.5)
+  ), url('${props => props.bgColor}');
+  background-size: cover;
+  background-repeat: no-repeat;
   box-shadow: var(--shadow-md);
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   width: 100%;
+  height: 620px;
   border-radius: 0.6rem;
   color: rgb(var(--text));
   font-size: 1.6rem;
@@ -38,6 +48,9 @@ const Card = styled.div`
 
 const Title = styled.div`
   font-weight: bold;
+  font-size: 36px;
+  color: white;
+  text-shadow: 0 1px 0 black;
 `;
 
 const Description = styled.div`
